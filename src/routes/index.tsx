@@ -4,7 +4,7 @@ import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { SearchBar } from "@/components/SearchBar";
 import { CarCard } from "@/components/CarCard";
 import { cars } from "@/data/cars";
-import { ShieldCheck, Wrench, HandshakeIcon, KeyRound } from "lucide-react";
+import { ShieldCheck, Wrench, Handshake, KeyRound } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,7 +64,7 @@ function Index() {
             {[
               { icon: ShieldCheck, title: "Anúncios verificados", desc: "Documentação conferida" },
               { icon: Wrench, title: "Avaliação técnica", desc: "Histórico do veículo" },
-              { icon: HandshakeIcon, title: "Negociação direta", desc: "Sem intermediários" },
+              { icon: Handshake, title: "Negociação direta", desc: "Sem intermediários" },
               { icon: KeyRound, title: "Aluguel para eventos", desc: "Casamentos e ensaios" },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex items-start gap-3">
