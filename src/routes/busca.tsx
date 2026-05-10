@@ -15,7 +15,7 @@ const searchSchema = z.object({
 });
 
 export const Route = createFileRoute("/busca")({
-  validateSearch: searchSchema,
+  validateSearch: (input: Record<string, unknown>) => searchSchema.parse(input),
   head: () => ({
     meta: [
       { title: "Buscar carros antigos — Garagem Clássica" },
