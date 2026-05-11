@@ -1,62 +1,77 @@
 import { Link } from "@tanstack/react-router";
-import { Car } from "lucide-react";
+import { Search, Car } from "lucide-react";
+
+const navLinks = [
+  { to: "/", label: "Início", exact: true },
+  { to: "/busca", label: "Anunciar" }, // kept order from reference; "Anunciar" goes to /anunciar below
+] as const;
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-border bg-secondary text-secondary-foreground">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <Car className="h-7 w-7 text-accent" />
-          <div className="leading-tight">
-            <div className="font-serif text-xl font-bold tracking-wide">Garagem Clássica</div>
-            <div className="text-[11px] uppercase tracking-widest text-accent">
-              compre · venda · alugue
-            </div>
-          </div>
+    <header className="bg-primary text-primary-foreground">
+      <nav className="mx-auto flex max-w-5xl items-center justify-center gap-2 px-4 py-4 text-lg font-medium md:gap-8">
+        <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-accent" }} className="px-2 py-1 hover:text-accent">
+          Início
         </Link>
-        <nav className="hidden gap-6 text-sm font-medium md:flex">
-          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-accent" }} className="hover:text-accent">
-            Início
-          </Link>
-          <Link to="/busca" activeProps={{ className: "text-accent" }} className="hover:text-accent">
-            Buscar carros
-          </Link>
-          <Link to="/anunciar" activeProps={{ className: "text-accent" }} className="hover:text-accent">
-            Anunciar
-          </Link>
-          <Link to="/sobre" activeProps={{ className: "text-accent" }} className="hover:text-accent">
-            Sobre
-          </Link>
-        </nav>
-      </div>
+        <span className="opacity-40">|</span>
+        <Link to="/anunciar" activeProps={{ className: "text-accent" }} className="px-2 py-1 hover:text-accent">
+          Anunciar
+        </Link>
+        <span className="opacity-40">|</span>
+        <Link to="/favoritos" activeProps={{ className: "text-accent" }} className="px-2 py-1 hover:text-accent">
+          Favoritos
+        </Link>
+        <span className="opacity-40">|</span>
+        <Link to="/perfil" activeProps={{ className: "text-accent" }} className="px-2 py-1 hover:text-accent">
+          Perfil
+        </Link>
+        <span className="opacity-40">|</span>
+        <Link to="/sobre" activeProps={{ className: "text-accent" }} className="px-2 py-1 hover:text-accent">
+          Sobre
+        </Link>
+      </nav>
     </header>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-border bg-secondary text-secondary-foreground">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
-        <div>
-          <div className="font-serif text-lg font-bold">Garagem Clássica</div>
-          <p className="mt-2 text-sm opacity-80">
-            O ponto de encontro de colecionadores e entusiastas de automóveis antigos no Brasil.
-          </p>
-        </div>
-        <div className="text-sm">
-          <div className="mb-2 font-semibold text-accent">Atendimento</div>
-          <p>Seg a Sex · 9h às 18h</p>
-          <p>contato@garagemclassica.com.br</p>
-        </div>
-        <div className="text-sm">
-          <div className="mb-2 font-semibold text-accent">Categorias</div>
-          <p>Anos 50 · 60 · 70 · 80</p>
-          <p>Nacionais e importados</p>
-        </div>
-      </div>
-      <div className="border-t border-border/40 py-4 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} Garagem Clássica — Todos os direitos reservados
+    <footer className="mt-16 bg-primary text-primary-foreground">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-6 py-5 text-base">
+        <span>Contatos: contato@garagemclassica.com.br</span>
+        <span className="opacity-80">© {new Date().getFullYear()} Garagem Clássica</span>
       </div>
     </footer>
+  );
+}
+
+export function BrandMark({ size = "md" }: { size?: "md" | "lg" }) {
+  const big = size === "lg";
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative inline-flex items-center justify-center">
+        <Car
+          className={big ? "h-20 w-20 text-primary" : "h-12 w-12 text-primary"}
+          strokeWidth={1.5}
+        />
+        <Search
+          className={
+            big
+              ? "absolute -right-3 -top-3 h-12 w-12 text-accent"
+              : "absolute -right-2 -top-2 h-7 w-7 text-accent"
+          }
+          strokeWidth={2}
+        />
+      </div>
+      <div
+        className={
+          big
+            ? "mt-3 font-serif text-4xl font-bold text-primary"
+            : "mt-1 font-serif text-xl font-bold text-primary"
+        }
+      >
+        Garagem Clássica
+      </div>
+    </div>
   );
 }
