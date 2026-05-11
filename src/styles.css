@@ -142,6 +142,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
   }
   .font-serif {
     font-family: "Playfair Display", Georgia, serif;

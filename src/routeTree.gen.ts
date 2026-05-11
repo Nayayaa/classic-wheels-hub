@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as BuscaRouteImport } from './routes/busca'
 import { Route as AnunciarRouteImport } from './routes/anunciar'
 import { Route as IndexRouteImport } from './routes/index'
@@ -18,6 +20,16 @@ import { Route as CarroIdRouteImport } from './routes/carro.$id'
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuscaRoute = BuscaRouteImport.update({
@@ -45,6 +57,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/anunciar': typeof AnunciarRoute
   '/busca': typeof BuscaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/perfil': typeof PerfilRoute
   '/sobre': typeof SobreRoute
   '/carro/$id': typeof CarroIdRoute
 }
@@ -52,6 +66,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/anunciar': typeof AnunciarRoute
   '/busca': typeof BuscaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/perfil': typeof PerfilRoute
   '/sobre': typeof SobreRoute
   '/carro/$id': typeof CarroIdRoute
 }
@@ -60,21 +76,47 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/anunciar': typeof AnunciarRoute
   '/busca': typeof BuscaRoute
+  '/favoritos': typeof FavoritosRoute
+  '/perfil': typeof PerfilRoute
   '/sobre': typeof SobreRoute
   '/carro/$id': typeof CarroIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/anunciar' | '/busca' | '/sobre' | '/carro/$id'
+  fullPaths:
+    | '/'
+    | '/anunciar'
+    | '/busca'
+    | '/favoritos'
+    | '/perfil'
+    | '/sobre'
+    | '/carro/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/anunciar' | '/busca' | '/sobre' | '/carro/$id'
-  id: '__root__' | '/' | '/anunciar' | '/busca' | '/sobre' | '/carro/$id'
+  to:
+    | '/'
+    | '/anunciar'
+    | '/busca'
+    | '/favoritos'
+    | '/perfil'
+    | '/sobre'
+    | '/carro/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/anunciar'
+    | '/busca'
+    | '/favoritos'
+    | '/perfil'
+    | '/sobre'
+    | '/carro/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnunciarRoute: typeof AnunciarRoute
   BuscaRoute: typeof BuscaRoute
+  FavoritosRoute: typeof FavoritosRoute
+  PerfilRoute: typeof PerfilRoute
   SobreRoute: typeof SobreRoute
   CarroIdRoute: typeof CarroIdRoute
 }
@@ -86,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/busca': {
@@ -123,6 +179,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnunciarRoute: AnunciarRoute,
   BuscaRoute: BuscaRoute,
+  FavoritosRoute: FavoritosRoute,
+  PerfilRoute: PerfilRoute,
   SobreRoute: SobreRoute,
   CarroIdRoute: CarroIdRoute,
 }
