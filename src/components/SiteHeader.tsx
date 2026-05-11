@@ -1,11 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Search, Car } from "lucide-react";
 
-const navLinks = [
-  { to: "/", label: "Início", exact: true },
-  { to: "/busca", label: "Anunciar" }, // kept order from reference; "Anunciar" goes to /anunciar below
-] as const;
-
 export function SiteHeader() {
   return (
     <header className="bg-primary text-primary-foreground">
