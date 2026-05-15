@@ -33,8 +33,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 bg-primary text-primary-foreground">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-6 py-5 text-base">
-        <span>Contatos: contato@garagemclassica.com.br</span>
-        <span className="opacity-80">© {new Date().getFullYear()} Garagem Clássica</span>
+        <span>Contatos: contato@lasanhatracker.com.br</span>
+        <span className="opacity-80">© {new Date().getFullYear()} Lasanha Tracker</span>
       </div>
     </footer>
   );
@@ -42,20 +42,15 @@ export function SiteFooter() {
 
 export function BrandMark({ size = "md" }: { size?: "md" | "lg" }) {
   const big = size === "lg";
+
   return (
     <div className="flex flex-col items-center">
       <div className="relative inline-flex items-center justify-center">
-        <Car
-          className={big ? "h-20 w-20 text-primary" : "h-12 w-12 text-primary"}
-          strokeWidth={1.5}
-        />
-        <Search
-          className={
-            big
-              ? "absolute -right-3 -top-3 h-12 w-12 text-accent"
-              : "absolute -right-2 -top-2 h-7 w-7 text-accent"
-          }
-          strokeWidth={2}
+    
+        <img
+          src="/img/icon_sem_fundo.png"
+          alt="Lasanha Tracker Logo"
+          className={big ? "h-50 w-auto" : "h-12 w-auto"}
         />
       </div>
       <div
@@ -65,7 +60,7 @@ export function BrandMark({ size = "md" }: { size?: "md" | "lg" }) {
             : "mt-1 font-serif text-xl font-bold text-primary"
         }
       >
-        Garagem Clássica
+        {/* Antigo nome escrito Lasanha Tracker */}
       </div>
     </div>
   );
