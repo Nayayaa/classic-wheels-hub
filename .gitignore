@@ -23,7 +23,6 @@ dist-ssr
 git
 BACKEND_COMPLETO.txt
 
-
 # Arquivos de Curso/Documentação Local
 *.md
 
@@ -52,3 +51,5 @@ BACKEND_COMPLETO.txt
 /backend/db.sqlite3
 /backend/media/
 
+
+venv/
