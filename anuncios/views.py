@@ -30,7 +30,7 @@ class AnuncioViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(ano=ano)
         if fonte:
             queryset = queryset.filter(fonte=fonte)
-        if status:
+        if status_filtro:
             queryset = queryset.filter(status=status_filtro)
 
         return queryset

@@ -25,6 +25,7 @@ class AnuncioSerializer(serializers.ModelSerializer):
             'descricao',
             'preco',
             'imagem',
+            'status',
             'dados_externos',     # JSON do scraping
             'anunciante',
             'criado_em',
