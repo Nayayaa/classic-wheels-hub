@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Anuncio
 from .serializers import AnuncioSerializer
 import requests
+
+
 class AnuncioViewSet(viewsets.ModelViewSet):
     
     queryset = Anuncio.objects.all()
@@ -19,8 +21,9 @@ class AnuncioViewSet(viewsets.ModelViewSet):
         marca            = self.request.query_params.get('marca')
         categoria        = self.request.query_params.get('categoria')
         ano              = self.request.query_params.get('ano')
-        fonte            = self.request.query_params.get('fonte')
+        portal           = self.request.query_params.get('portal')
         status_filtro    = self.request.query_params.get('status')
+        
 
         if marca:
             queryset = queryset.filter(marca__nome__icontains=marca)
@@ -28,9 +31,8 @@ class AnuncioViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(categoria__nome__icontains=categoria)
         if ano:
             queryset = queryset.filter(ano=ano)
-        if fonte:
-            queryset = queryset.filter(fonte=fonte)
-        if status:
+
+        if status_filtro:
             queryset = queryset.filter(status=status_filtro)
 
         return queryset
