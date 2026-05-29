@@ -1,7 +1,6 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter, BrandMark } from "@/components/SiteHeader";
+import { SearchBar } from "@/components/SearchBar";
 import { CarCard } from "@/components/CarCard";
 import { cars } from "@/data/cars";
 
@@ -22,9 +21,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const featured = cars.slice(0, 4);
-  const navigate = useNavigate();
-  const [q, setQ] = useState("");
+  const featured = cars;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -33,22 +30,9 @@ function Index() {
         <section className="mx-auto flex max-w-5xl flex-col items-center px-4 pt-14 pb-10">
           <BrandMark size="lg" />
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              navigate({ to: "/busca", search: { q: q || undefined } as any });
-            }}
-            className="mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border-2 border-border bg-card px-5 py-3 shadow-sm focus-within:border-primary"
-          >
-            <Search className="h-5 w-5 text-muted-foreground" aria-hidden />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Pesquisar modelo (Ex: Fusca)..."
-              aria-label="Pesquisar modelo"
-              className="w-full bg-transparent text-lg outline-none placeholder:text-muted-foreground"
-            />
-          </form>
+          <div className="mt-10 w-full max-w-6xl">
+            <SearchBar />
+          </div>
         </section>
 
         <section className="mx-auto max-w-5xl px-4 pb-16">

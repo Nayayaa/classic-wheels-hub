@@ -12,6 +12,11 @@ const searchSchema = z.object({
   type: z.enum(["venda", "aluguel"]).optional(),
   minYear: z.number().optional(),
   maxYear: z.number().optional(),
+  blackPlate: z.preprocess((value) => {
+    if (value === "true" || value === true) return true;
+    if (value === "false") return false;
+    return undefined;
+  }, z.boolean()).optional(),
 });
 
 export const Route = createFileRoute("/busca")({
@@ -47,6 +52,7 @@ function BuscaPage() {
     if (search.type) list = list.filter((c) => c.type === search.type);
     if (search.minYear) list = list.filter((c) => c.year >= search.minYear!);
     if (search.maxYear) list = list.filter((c) => c.year <= search.maxYear!);
+    if (search.blackPlate) list = list.filter((c) => c.blackPlate);
     if (sort === "menor") list.sort((a, b) => a.price - b.price);
     if (sort === "maior") list.sort((a, b) => b.price - a.price);
     if (sort === "antigos") list.sort((a, b) => a.year - b.year);
@@ -62,7 +68,12 @@ function BuscaPage() {
             <h1 className="font-serif text-3xl font-bold">Buscar carros</h1>
             <p className="mt-1 opacity-90">Filtre entre os clássicos disponíveis</p>
             <div className="mt-6">
-              <SearchBar initialQ={search.q ?? ""} initialBrand={search.brand ?? ""} initialType={search.type ?? ""} />
+              <SearchBar
+                initialQ={search.q ?? ""}
+                initialBrand={search.brand ?? ""}
+                initialType={search.type ?? ""}
+                initialBlackPlate={search.blackPlate ?? false}
+              />
             </div>
           </div>
         </section>

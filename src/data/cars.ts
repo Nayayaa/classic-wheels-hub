@@ -4,6 +4,8 @@ import car3 from "@/assets/car-3.jpg";
 import car4 from "@/assets/car-4.jpg";
 import car5 from "@/assets/car-5.jpg";
 import car6 from "@/assets/car-6.jpg";
+import car7 from "@/assets/car-7.jpg";
+import car8 from "@/assets/car-8.jpg";
 
 export type Listing = {
   id: string;
@@ -19,6 +21,7 @@ export type Listing = {
   image: string;
   description: string;
   seller: string;
+  blackPlate?: boolean;
 };
 
 export const cars: Listing[] = [
@@ -37,6 +40,7 @@ export const cars: Listing[] = [
     description:
       "Bel Air totalmente restaurado, motor original revisado, pintura turquesa de fábrica. Documentação em dia, placa preta.",
     seller: "Garagem Clássicos SP",
+    blackPlate: true,
   },
   {
     id: "2",
@@ -88,35 +92,67 @@ export const cars: Listing[] = [
   },
   {
     id: "5",
-    title: "Puma GTE 1973",
-    brand: "Puma",
-    model: "GTE",
-    year: 1973,
-    price: 220000,
-    type: "aluguel",
+    title: "Ford Belina 1.8 GLX 1990",
+    brand: "Ford",
+    model: "Belina 1.8 GLX",
+    year: 1990,
+    price: 42000,
+    type: "venda",
     city: "Rio de Janeiro",
     state: "RJ",
-    km: 65000,
+    km: 123000,
     image: car5,
     description:
-      "Puma GTE vermelho, motor VW 1600. Disponível para aluguel em eventos, ensaios e casamentos.",
-    seller: "Eventos Vintage RJ",
+      "Belina 1.8 GLX 1990, motor revisado, interior bem conservado e pronta para rodar.",
+    seller: "Clássicos RJ",
   },
   {
     id: "6",
-    title: "Willys Interlagos 1965",
-    brand: "Willys",
-    model: "Interlagos",
-    year: 1965,
-    price: 480000,
+    title: "Chevrolet Kadett GSi 1992",
+    brand: "Chevrolet",
+    model: "Kadett GSi",
+    year: 1992,
+    price: 68000,
     type: "venda",
     city: "Campinas",
     state: "SP",
-    km: 42000,
+    km: 98000,
     image: car6,
     description:
-      "Interlagos prata, exemplar raro, restauração concursal. Um dos poucos remanescentes no Brasil.",
+      "Kadett GSi 1992 com acabamento esportivo, mecânica revisada e documentação em ordem.",
     seller: "Coleção Privada",
+  },
+  {
+    id: "7",
+    title: "Ford Mustang Mach 1 1969",
+    brand: "Ford",
+    model: "Mustang Mach 1",
+    year: 1969,
+    price: 520000,
+    type: "venda",
+    city: "São Paulo",
+    state: "SP",
+    km: 87000,
+    image: car7,
+    description:
+      "Mustang Mach 1 1969 V8, restauro completo, motor potente e detalhes originais.",
+    seller: "Mustang Garage",
+  },
+  {
+    id: "8",
+    title: "Chevrolet C10 1970",
+    brand: "Chevrolet",
+    model: "C10",
+    year: 1970,
+    price: 260000,
+    type: "venda",
+    city: "Curitiba",
+    state: "PR",
+    km: 112000,
+    image: car8,
+    description:
+      "Chevrolet C10 1970, carroceria restaurada, motor V8 revisado e pronta para colecionar.",
+    seller: "Clássicos Sul",
   },
 ];
 

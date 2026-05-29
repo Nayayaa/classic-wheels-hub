@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { CarCard } from "@/components/CarCard";
+import { cars } from "@/data/cars";
+import { useFavorites } from "@/hooks/use-favorites";
 
 export const Route = createFileRoute("/favoritos")({
   head: () => ({
@@ -13,22 +16,41 @@ export const Route = createFileRoute("/favoritos")({
 });
 
 function FavoritosPage() {
+  const { favorites } = useFavorites();
+  const favoriteCars = cars.filter((car) => favorites.includes(car.id));
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-16 text-center">
-        <Heart className="mx-auto h-14 w-14 text-primary" strokeWidth={1.5} />
-        <h1 className="mt-4 font-serif text-3xl font-bold">Seus favoritos</h1>
-        <p className="mt-3 text-lg text-muted-foreground">
-          Você ainda não salvou nenhum carro. Explore os anúncios e clique no coração para
-          guardar seus clássicos preferidos.
-        </p>
-        <Link
-          to="/busca"
-          className="mt-8 inline-block rounded bg-accent px-6 py-3 text-base font-semibold text-accent-foreground hover:opacity-90"
-        >
-          Buscar carros
-        </Link>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-16">
+        <div className="text-center">
+          <Heart className="mx-auto h-14 w-14 text-primary" strokeWidth={1.5} />
+          <h1 className="mt-4 font-serif text-3xl font-bold">Seus favoritos</h1>
+          <p className="mt-3 text-lg text-muted-foreground">
+            Seus carros favoritos ficam salvos aqui. Você pode remover a qualquer momento.
+          </p>
+        </div>
+
+        {favoriteCars.length === 0 ? (
+          <div className="mx-auto mt-12 max-w-3xl text-center">
+            <p className="text-lg text-muted-foreground">
+              Você ainda não salvou nenhum carro. Explore os anúncios e clique no coração para
+              guardar seus clássicos preferidos.
+            </p>
+            <Link
+              to="/busca"
+              className="mt-8 inline-block rounded bg-accent px-6 py-3 text-base font-semibold text-accent-foreground hover:opacity-90"
+            >
+              Buscar carros
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {favoriteCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
+        )}
       </main>
       <SiteFooter />
     </div>
