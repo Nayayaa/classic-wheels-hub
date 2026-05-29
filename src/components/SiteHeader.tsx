@@ -53,15 +53,6 @@ export function BrandMark({ size = "md" }: { size?: "md" | "lg" }) {
           className={big ? "h-50 w-auto" : "h-12 w-auto"}
         />
       </div>
-      <div
-        className={
-          big
-            ? "mt-3 font-serif text-4xl font-bold text-primary"
-            : "mt-1 font-serif text-xl font-bold text-primary"
-        }
-      >
-        {/* Antigo nome escrito Lasanha Tracker */}
-      </div>
     </div>
   );
 }
