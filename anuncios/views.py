@@ -1,9 +1,9 @@
 from rest_framework import viewsets, status, filters, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Anuncio
-from .serializers import AnuncioSerializer, FotoAnuncioSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from .models import Anuncio, Portal
+from .serializers import AnuncioSerializer, FotoAnuncioSerializer, PortalSerializer
 import requests
 from rest_framework.parsers import MultiPartParser
 
@@ -111,25 +111,22 @@ class AnuncioViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+    @action(
+        detail=True,
+        methods=['post'],
+        url_path='fotos',
+        parser_classes=[MultiPartParser]
+    )
+    def upload_foto(self, request, pk=None):
+        anuncio = self.get_object()
+        serializer = FotoAnuncioSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(anuncio=anuncio)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PortalViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Portal.objects.filter(ativo=True)
     serializer_class = PortalSerializer
     permission_classes = [AllowAny]
-
-
-
-@action(
-    detail=True,methods=['post'], 
-    url_path = 'fotos',
-    parser_classes=[MultiPartParser]
-    )
-
-def upload_foto (self, request, pk = None):
-    
-    anuncio = self.get_object()
-    serializer = FotoAnuncioSerializer (data=request.data)
-     if serializer.is_valid():
-         serializer.save(anuncio =anuncio)
-         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
