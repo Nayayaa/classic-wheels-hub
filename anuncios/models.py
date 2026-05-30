@@ -129,7 +129,7 @@ class Estado (models.Model):
     class Meta:
         ordering = ["nome"]
         verbose_name = "estado"
-        verbose_name = "estados"
+        verbose_name_plural = "estados"
     def __str__ (self):
         return f"{self.nome} ({self.uf})"
         
@@ -144,7 +144,7 @@ class Cidade(models.Model):
         unique_together =  [["nome", "estado"]]
         ordering = ["nome"]
         verbose_name = "estado"
-        verbose_name = "estados"
+        verbose_name_plural = "estados"
     def __str__ (self):
         return f"{self.nome} ({self.estado.uf})"
         

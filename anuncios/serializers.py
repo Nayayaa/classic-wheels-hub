@@ -5,11 +5,11 @@ from .models import Anuncio, FotoAnuncio, Portal, Cidade, Estado
 class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estado
-        field = ["id", "nome", "uf"]
+        fields = ["id", "nome", "uf"]
 
 
 
-class CidadeSerialiazer (serializers.ModelSerializer):
+class CidadeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cidade
         fields = ["id", "nome", "estado"]
@@ -44,8 +44,8 @@ class AnuncioSerializer(serializers.ModelSerializer):
         model = Anuncio
         fields = [
             'id',
-            'placa_preta'
-            'portal'
+            'placa_preta',
+            'portal',
             'portal_nome',
             'marca',
             'marca_nome',

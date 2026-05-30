@@ -31,6 +31,8 @@ class AnuncioViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(categoria__nome__icontains=categoria)
         if ano:
             queryset = queryset.filter(ano=ano)
+        if portal:
+            queryset = queryset.filter(portal__id=portal)
 
         if status_filtro:
             queryset = queryset.filter(status=status_filtro)
