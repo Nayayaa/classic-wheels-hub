@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
+from .models import User, PerfilAnunciante
 
 
 @admin.register(User)
@@ -20,3 +20,10 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ['username', 'email', 'cpf']
     ordering = ['-date_joined']
     readonly_fields = ['last_login', 'date_joined']
+
+
+@admin.register(PerfilAnunciante)
+class PerfilAnuncianteAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'verificado', 'status_verificacao', 'score']
+    search_fields = ['user__username', 'user__email']
+    list_filter = ['verificado', 'status_verificacao']

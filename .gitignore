@@ -21,7 +21,8 @@ dist-ssr
 .dev.vars
 
 git
-BACKEND_COMPLETO.txt
+BACKEND_CODIGO_COMPLETO.txt
+FRONTEND__CODIGO_COMPLETO.txt
 
 # Arquivos de Curso/Documentação Local
 *.md

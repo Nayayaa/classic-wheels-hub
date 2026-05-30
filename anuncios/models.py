@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from catalogo.models import Marca, Categoria
+from catalogo.models  import Marca, Categoria 
+
 
 User = get_user_model()
 
@@ -43,6 +44,7 @@ class Anuncio(models.Model):
         PAUSADO = 'pausado', 'Pausado'
         
     # Relacionamentos
+    
     portal = models.ForeignKey(
         Portal,
         on_delete=models.PROTECT,
@@ -67,6 +69,11 @@ class Anuncio(models.Model):
     modelo = models.CharField(max_length=100, verbose_name="Modelo")
     ano = models.PositiveIntegerField(verbose_name="Ano")
     cor = models.CharField(max_length=50, blank=True, verbose_name="Cor")
+    placa_preta = models.BooleanField(
+        default = False,
+        verbose_name = 'placa_preta',
+        help_text = " Se marcado, o veiculo é de colecionador"
+        )
     
     combustivel = models.CharField(max_length=50, blank=True,
             verbose_name="Combustível"
@@ -106,6 +113,8 @@ class Anuncio(models.Model):
     atualizado_em = models.DateTimeField(
         auto_now=True, verbose_name="Atualizado em"
     )
+    
+
     class Meta:
         ordering = ["-criado_em"]
 
@@ -113,6 +122,33 @@ class Anuncio(models.Model):
         return f"{self.marca.nome} {self.modelo} ({self.ano})"
 
 
+class Estado (models.Model):
+    nome = models.CharField(max_length= 100, unique = True)
+    uf   = models.CharField(max_length=2, unique = True)
+    
+    class Meta:
+        ordering = ["nome"]
+        verbose_name = "estado"
+        verbose_name = "estados"
+    def __str__ (self):
+        return f"{self.nome} ({self.uf})"
+        
+
+
+class Cidade(models.Model):
+    estado      = models.ForeignKey(Estado, on_delete = models.CASCADE)
+    nome        = models.CharField(max_length= 100)
+    codigo_ibge = models.CharField(max_length =7, unique = True, blank = True)
+    
+    class Meta: 
+        unique_together =  [["nome", "estado"]]
+        ordering = ["nome"]
+        verbose_name = "estado"
+        verbose_name = "estados"
+    def __str__ (self):
+        return f"{self.nome} ({self.estado.uf})"
+        
+        
 class FotoAnuncio(models.Model):
     """
     Modelo para Fotos de Anúncios.
