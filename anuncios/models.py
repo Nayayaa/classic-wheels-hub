@@ -49,7 +49,8 @@ class Anuncio(models.Model):
         Portal,
         on_delete=models.PROTECT,
         related_name="anuncios",
-        verbose_name="Portal de Origem"
+        verbose_name="Portal de Origem",
+        null =True
     )
     marca = models.ForeignKey(
         Marca, on_delete=models.PROTECT,

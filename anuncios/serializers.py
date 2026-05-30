@@ -16,6 +16,7 @@ class CidadeSerializer(serializers.ModelSerializer):
         
         
 class PortalSerializer(serializers.ModelSerializer):
+
     class Meta: 
         model = Portal
         fields = ['id','nome']
@@ -68,5 +69,5 @@ class AnuncioSerializer(serializers.ModelSerializer):
             'atualizado_em',
         ]   
         
-        read_only_fields = ['anunciante', 'criado_em', 'atualizado_em', 'fotos', 'status']
+        read_only_fields = ['anunciante', 'criado_em', 'atualizado_em', 'status']
         
